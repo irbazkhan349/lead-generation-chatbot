@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lead Generation Chatbot</title>
     <style>
-        /* Reset some default styles */
+        /* Reset default styles */
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
             color: #333;
         }
 
@@ -32,13 +32,13 @@
 
         h1 {
             color: #2c3e50;
-            font-size: 36px;
+            font-size: 48px;
             margin-bottom: 20px;
             text-align: center;
         }
 
         p {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 40px;
             text-align: center;
             color: #7f8c8d;
@@ -46,18 +46,19 @@
 
         /* Chatbot button styling */
         .chatbot-button {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background-color: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 15px 40px;
+            font-size: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
         .chatbot-button:hover {
-            background-color: #34495e;
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         /* Footer styling */
@@ -69,6 +70,32 @@
             font-size: 14px;
             color: #95a5a6;
         }
+
+        /* Customize Chatling Chatbox */
+        .chatling-chatbox {
+            display: none; /* Initially hidden */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 360px;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .chatling-chatbox iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Remove branding - if allowed by the service */
+        .chatling-chatbox iframe + div {
+            display: none !important;
+        }
+
     </style>
 </head>
 <body>
@@ -81,18 +108,34 @@
         <button class="chatbot-button" onclick="openChatbot()">Start Chat</button>
     </div>
 
+    <!-- Chatling chatbot container -->
+    <div class="chatling-chatbox" id="chatbox"></div>
+
     <!-- Chatling chatbot script -->
     <script>
         window.chtlConfig = { chatbotId: "6666841397" };
+
+        // Function to open the chatbot
         function openChatbot() {
-            // Simulate click to open the chatbot immediately when button is clicked
-            document.getElementById('chatling-embed-script').click();
+            const chatbox = document.getElementById('chatbox');
+            if (chatbox.style.display === "none") {
+                chatbox.style.display = "block"; // Show chatbox
+            }
         }
+
+        // Dynamically add the Chatling script
+        const script = document.createElement('script');
+        script.async = true;
+        script.setAttribute("data-id", "6666841397");
+        script.setAttribute("id", "chatling-embed-script");
+        script.type = "text/javascript";
+        script.src = "https://chatling.ai/js/embed.js";
+        document.body.appendChild(script);
     </script>
-    <script async data-id="6666841397" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
 
     <footer>
         © 2024 Lead Generation Chatbot. All rights reserved.
     </footer>
+
 </body>
 </html>
