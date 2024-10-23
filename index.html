@@ -73,7 +73,6 @@
 
         /* Customize Chatling Chatbox */
         .chatling-chatbox {
-            display: none; /* Initially hidden */
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -82,13 +81,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             z-index: 9999;
-        }
-
-        .chatling-chatbox iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
         }
 
         /* Remove branding - if allowed by the service */
@@ -105,7 +97,7 @@
         <p>We're here to assist you with any questions or inquiries. Click below to start a chat with us.</p>
 
         <!-- Chatbot Button -->
-        <button class="chatbot-button" onclick="openChatbot()">Start Chat</button>
+        <button class="chatbot-button" onclick="initializeChatbot()">Start Chat</button>
     </div>
 
     <!-- Chatling chatbot container -->
@@ -113,24 +105,24 @@
 
     <!-- Chatling chatbot script -->
     <script>
-        window.chtlConfig = { chatbotId: "6666841397" };
-
-        // Function to open the chatbot
-        function openChatbot() {
-            const chatbox = document.getElementById('chatbox');
-            if (chatbox.style.display === "none") {
-                chatbox.style.display = "block"; // Show chatbox
+        // Function to initialize the chatbot on button click
+        function initializeChatbot() {
+            if (!document.getElementById('chatling-embed-script')) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.setAttribute("data-id", "6666841397");
+                script.setAttribute("id", "chatling-embed-script");
+                script.type = "text/javascript";
+                script.src = "https://chatling.ai/js/embed.js";
+                document.body.appendChild(script);
             }
+            document.getElementById('chatbox').style.display = "block"; // Show chatbox
         }
 
-        // Dynamically add the Chatling script
-        const script = document.createElement('script');
-        script.async = true;
-        script.setAttribute("data-id", "6666841397");
-        script.setAttribute("id", "chatling-embed-script");
-        script.type = "text/javascript";
-        script.src = "https://chatling.ai/js/embed.js";
-        document.body.appendChild(script);
+        // Hide chatbox initially
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('chatbox').style.display = 'none';
+        });
     </script>
 
     <footer>
